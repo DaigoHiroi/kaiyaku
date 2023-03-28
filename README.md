@@ -34,3 +34,35 @@ Application key set successfully.
 [app] $ php artisan storage:link
 [app] $ php artisan migrate
 ````
+
+
+### React, SemanticUI導入
+````
+# appコンテナに入って、UIパッケージ導入
+[app] $ docker-compose exec app composer require laravel/ui
+
+# appコンテナに入って、React.js導入　--authで認証機能も追加という意味
+[app] $ docker-compose exec app php artisan ui react --auth
+
+# appコンテナに入って、Semantic UI導入
+$ docker-compose exec app npm install semantic-ui-react semantic-ui-css
+
+# appコンテナに入って、TypeScript導入
+$ docker-compose exec app npm install ts-loader typescript react-router-dom @types/react @types/react-dom @types/react-router-dom --save-dev
+
+# すべてインストール
+$ docker-compose exec app npm install
+
+$ php artisan migrate
+
+#tsconfigファイルを作成
+$ docker-compose exec app touch tsconfig.json
+
+#中身を書く。
+
+# ビルドはコンテナではなく、src配下で実行する。
+$ npm run dev
+
+使うとき
+import 'semantic-ui-css/semantic.min.css'
+````
