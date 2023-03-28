@@ -32,23 +32,24 @@ envをコピー、APP_KEY= の値がないとエラーになるため作成。
 [app] $ php artisan key:generate
 Application key set successfully.
 [app] $ php artisan storage:link
-[app] $ php artisan migrate
+<!-- [app] $ php artisan migrate -->
 ````
 
 
 ### React, SemanticUI導入
 ````
 # appコンテナに入って、UIパッケージ導入
-[app] $ docker-compose exec app composer require laravel/ui
+$ docker-compose exec app composer require laravel/breeze --dev
+$ docker-compose exec app php artisan breeze:install react --ssr
 
 # appコンテナに入って、React.js導入　--authで認証機能も追加という意味
-[app] $ docker-compose exec app php artisan ui react --auth
-
-# appコンテナに入って、Semantic UI導入
-$ docker-compose exec app npm install semantic-ui-react semantic-ui-css
+$ docker-compose exec app php artisan ui react --auth
 
 # appコンテナに入って、TypeScript導入
 $ docker-compose exec app npm install ts-loader typescript react-router-dom @types/react @types/react-dom @types/react-router-dom --save-dev
+
+# appコンテナに入って、Semantic UI導入
+$ docker-compose exec app npm install semantic-ui-react semantic-ui-css
 
 # すべてインストール
 $ docker-compose exec app npm install
